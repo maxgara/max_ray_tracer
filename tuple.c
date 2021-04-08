@@ -4,9 +4,18 @@
 #define Point Tuple
 #define MIN_SIGNIFICANT_F 0.00001
 typedef struct{
-  float x;
-  float y;
-  float z;
+  union{
+    float x;
+    int r;
+  };
+  union{
+    float y;
+    int g;
+  };
+  union{
+    float z;
+    int b;
+  };
   float w;
 }Tuple;
 
@@ -59,6 +68,13 @@ float dot(Tuple A, Tuple B){
   float out = A.x*B.x + A.y*B.y + A.z*B.z;
   return out;
 }
+Vector cross(Vector A, Vector B){
+  float x = A.y * B.z - A.z * B.y;
+  float y = A.z * B.x - A.x * B.z;
+  float z = A.x * B.y - A.y * B.x;
+  Vector out = {x,y,z,0.0};
+  return out;
+}
 
 int is_equal_tup(Tuple A, Tuple B){
   Tuple diff = subtract_tup(B,A);
@@ -68,13 +84,15 @@ int is_equal_tup(Tuple A, Tuple B){
   }
   return 0;
 }
+/*
 int main(){
-  Vector t = new_Vector(1,2,3);
-  Point p = new_Point(1,2,6);
+  Vector t = new_Vector(1,0,0);
+  Point p = new_Point(0,1,0);
   printf("mag:%f\n",tup_magnitude(p));
   Tuple p1 = normalize(p);
   print_tup(p1);
   //print_Point(p);
-  //print_Vector(t);
+  Tuple c = cross(t,p);
+  print_tup(c);
   return 0;
-}
+}*/
