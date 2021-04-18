@@ -1,3 +1,6 @@
+#ifndef TUPLE_SEEN
+#define TUPLE_SEEN
+
 #include <stdio.h>
 #include <math.h>
 #define Vector Tuple
@@ -96,3 +99,4 @@ int main(){
   print_tup(c);
   return 0;
 }*/
+#endif
