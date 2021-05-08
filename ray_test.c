@@ -2,7 +2,7 @@
 
 int main(){
   printf("ray test\n");
-  Point o = new_Point(0,0,0);
+  Point o = new_Point(0,4,0);
   Vector d = new_Vector(1,0,0);
   Ray r = new_Ray(o,d);
   printf("point:\n");
@@ -10,7 +10,7 @@ int main(){
   Sphere sphere = new_Sphere();
   Sphere sphere2 = new_Sphere();
   // sphere2 = transform_sphere(sphere2,scale_M4(IDENTITY_4,2));
-  sphere2 = transform_sphere(sphere2,get_translation(5,0,0));
+  sphere2 = transform_sphere(sphere2,get_translation(0,4,0));
   printf("sphere (%d,%d) transform:\n",sphere2.transform.R, sphere2.transform.C);
 
   print_matrix(sphere2.transform);

@@ -2,6 +2,11 @@
 int test_matrix(M4 matrix){
   printf("matrix:\n");
   print_matrix(matrix);
+  printf("vector:\n");
+  Tuple v = new_Vector(1,2,3);
+  print_tup(v);
+  printf("mv prod:\n");
+  print_tup(mvprod(matrix,v));
   float det = det_M4(matrix);
   printf("\ndeterminant:%f\n",det);
   printf("transpose\n");
@@ -21,7 +26,6 @@ int test_matrix(M4 matrix){
   printf("\nscale test:\nscale matrix:\n");
   M4 scale = get_scale(1,2,3);
   print_matrix(scale);
-  Tuple v = new_Vector(1,2,3);
   printf("\nvector:\n");
   print_tup(v);
   printf("\nproduct:\n");
@@ -55,8 +59,12 @@ int main(){
   // print_matrix(matrix3t);
   // printf("cofactor(0,0):%f\n",cofactor_M4(matrix3,0,0));
 
-  float arr4[] = {8,-5,9,2,7,5,6,1,-6,0,9,6,-3,0,-9,-4};
   float arr3[] = {1,0,0,0,1,0,0,0,2};
+  float arr4[] = {8,-5,9,2,7,5,6,1,-6,0,9,6,-3,0,-9,-4};
+  float arr5[] = {1,0,0,1,0,2,0,0,0,0,3,0,0,0,0,4};
+  M4 matrix3 = arr_to_M(arr3,3);
   M4 matrix4 = arr_to_M(arr4,4);
-  test_matrix(matrix4);
+  M4 matrix5 = arr_to_M(arr5,4);
+
+  test_matrix(matrix5);
 }

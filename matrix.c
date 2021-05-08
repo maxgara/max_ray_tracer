@@ -174,7 +174,7 @@ Tuple mvprod(M4 matrix, Tuple v){
   for(int i=0;i<4;i++){
     float new_val=0;
     for(int j=0;j<4;j++){
-      new_val+=matrix.index[i][j]*old_vec[i];
+      new_val+=matrix.index[i][j]*old_vec[j];
     }
     new_vec[i]=new_val;
   }

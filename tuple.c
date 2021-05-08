@@ -31,7 +31,7 @@ Point new_Point(float x, float y, float z){
   return out;
 }
 void print_tup(Vector v){
-  printf("(%f,%f,%f)\n",v.x,v.y,v.z);
+  printf("(%f,%f,%f,%f)\n",v.x,v.y,v.z,v.w);
 }
 
 int is_point(Tuple t){
