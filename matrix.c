@@ -3,12 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define IDENTITY_4 arr_to_M({1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1});
+#define IDENTITY_4 arr_to_M((float[]){1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1},4)
 #include "tuple.c"
 #define MAXN 300
 
 typedef struct M4_s{
-  size_t R, C;
+  int R, C;
   float index[4][4];
 } M4;
 
@@ -60,7 +60,16 @@ M4 d2_arr_to_M4(float arr[4][4]){
   }
   return out;
 }
-
+M4 arr_to_M4(float *arr){
+  int N=4;
+  M4 out;
+  out.R=N;
+  out.C=N;
+  for(int i=0;i<N*N;i++){
+        out.index[i/N][i%N] = arr[i];
+  }
+  return out;
+}
 M4 arr_to_M(float *arr, int N){
   M4 out;
   out.R=N;
@@ -174,7 +183,7 @@ Tuple mvprod(M4 matrix, Tuple v){
 }
 
 M4 get_scale(float a,float b,float c){
-  float arr[16] = {1,0,0,0,0,b,0,0,0,0,c,0,0,0,0,1};
+  float arr[16] = {a,0,0,0,0,b,0,0,0,0,c,0,0,0,0,1};
   M4 out = arr_to_M(arr,4);
   return out;
 }
