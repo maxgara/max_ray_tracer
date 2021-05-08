@@ -12,9 +12,7 @@ typedef struct M4_s{
   float index[4][4];
 } M4;
 
-int get_matrix_prod_element(M4 matrix_a, M4 matrix_b, int result_row, int result_column);
-M4 multiply_matrices(M4 matrix_a, M4 matrix_b);
-void print_matrix(M4 matrix);
+
 int get_matrix_prod_element(M4 matrix_a, M4 matrix_b, int result_row, int result_column){
   int prod=0;
   for(int i=0;i<matrix_a.C;i++){

@@ -1,3 +1,5 @@
+#ifndef COLOR_FOUND
+#define COLOR_FOUND
 #include "tuple.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,3 +62,4 @@ void canvas_to_ppm(Canvas canvas, FILE * fp){
     }
   }
 }
+#endif
