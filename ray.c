@@ -32,7 +32,7 @@ Sphere transform_sphere(Sphere sphere, M4 transform){
   return sphere;
 }
 
-Ray new_Ray(Point origin, Point direction){
+Ray new_Ray(Point origin, Vector direction){
   Ray out;
   out.origin = origin;
   out.direction = direction;
@@ -69,9 +69,8 @@ int get_ray_sphere_intersections(Ray ray, Sphere sphere, Intersection *intersect
     return 1;
   }
   Ray adjusted_ray = transform_ray(ray, sphere_transform_inverse); // so we can treat sphere as unit sphere
-  printf("adjusted ray:\n");
-  print_tup(adjusted_ray.origin);
-  print_tup(adjusted_ray.direction);
+  // print_tup(adjusted_ray.origin);
+  // print_tup(adjusted_ray.direction);
   Vector p = adjusted_ray.origin;
   Vector v = adjusted_ray.direction;
   float discriminant = pow(dot(p,v),2)-(dot(v,v) * (dot(p,p) - 1));

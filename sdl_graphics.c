@@ -51,14 +51,13 @@ bool init_sdl_window(){
 }
 
 bool loadMedia(char *filename){
-    bool success = true;
     gHelloWorld = IMG_Load(filename);
     if ( gHelloWorld == NULL){
       printf("unable to load image file %s\n",filename);
-      success = false;
+      return false;
     }
     //SDL_SaveBMP(gHelloWorld,"bmp_out.bmp");
-    return success;
+    return true;
 }
 
 void close_SDL(){
@@ -85,5 +84,8 @@ bool quick_display_file(char *image_path){
       }
     }
 return 0;
+}
+bool quick_display_canvas(Canvas *canvas){
+
 }
 #endif

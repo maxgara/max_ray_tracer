@@ -1,6 +1,6 @@
 #ifndef COLOR_FOUND
 #define COLOR_FOUND
-#include "tuple.h"
+#include "tuple.c"
 #include <stdio.h>
 #include <stdlib.h>
 #define Color Tuple
