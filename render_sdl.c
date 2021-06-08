@@ -1,8 +1,50 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-//render a Canvas in a new window
+
+SDL_Window *window;
+SDL_Renderer *renderer;
+SDL_Texture *texture;
+
+int init_sdl(int canvas_x_size, int canvas_y_size){
+  if (SDL_Init( SDL_INIT_VIDEO) != 0)
+  {
+    printf("failed init\n");
+    return 1;
+  }
+  SDL_CreateWindowAndRenderer(canvas_x_size, canvas_y_size, 0, &window, &renderer);
+  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, canvas_x_size, canvas_y_size);
+  if(texture == NULL){
+    printf("failed texture creation\n");
+    return 1;
+  }
+  else{
+    printf("texture:%p\n",texture);
+  }
+}
+
+int render_existing_sdl(Canvas *can, int canvas_x_size, int canvas_y_size){
+  void *pixels;
+  SDL_RenderClear(renderer);
+  int pitch; //hopefully this doesn't do anything?
+  if( SDL_LockTexture(texture, NULL, &pixels, &pitch) != 0){
+    printf("bad lock\n");
+    return 1;
+  };
+  for(int i=0;i<canvas_x_size * canvas_y_size;i++){
+    //pixel color specified in format SDL_PIXELFORMAT_ARGB8888
+    *(int *)pixels = can->pixels[i/canvas_y_size][i%canvas_x_size];
+    pixels = (int *)pixels + 1;
+  }
+  SDL_UnlockTexture(texture);
+  SDL_RenderCopy(renderer, texture, NULL, NULL);
+  SDL_RenderPresent(renderer);
+  //remember to call SDL_QUIT after done with window
+
+}
+
 int render_sdl(Canvas *can, int canvas_x_size, int canvas_y_size){
+//render a Canvas in a new window
   if (SDL_Init( SDL_INIT_VIDEO) != 0)
   {
     printf("failed init\n");
@@ -28,12 +70,10 @@ int render_sdl(Canvas *can, int canvas_x_size, int canvas_y_size){
   if( SDL_LockTexture(texture, NULL, &pixels, &pitch) != 0){
     printf("bad lock\n");
     return 1;
-  };
+  }
 
   printf("pitch:%d\n",pitch);
-  int blue = 255;
-  int green = 255<<8;
-  int red = 255<<16;
+
   for(int i=0;i<canvas_x_size * canvas_y_size;i++){
     //pixel color specified in format SDL_PIXELFORMAT_ARGB8888
     *(int *)pixels = can->pixels[i/canvas_y_size][i%canvas_x_size];
