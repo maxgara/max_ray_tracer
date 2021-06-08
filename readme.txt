@@ -11,3 +11,6 @@ matrix.c: confusingly does not define a Matrix struct, only an M4 struct (4X4 ma
     create 4X4 matrices.
 sdl_graphics.c: defines functions to easily display images with SDL. Currently only allows reading from file, not dealing with Canvas
     objects directly
+    
+ray.c: defines ray, sphere, intersection structs. defines function to allow transformation of rays, spheres and find intersection of rays and spheres.     
+
