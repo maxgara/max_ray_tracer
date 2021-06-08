@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define IDENTITY_4 arr_to_M((float[]){1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1},4)
+#include <string.h>
+#define IDENTITY_3 arr_to_M3((float[]){1,0,0,0,1,0,0,0,1})
 #include "tuple.c"
 #define MAXN 300
 
@@ -39,18 +40,12 @@ void print_matrix(M3 *matrix){
 }
 M3 d2_arr_to_M3(float arr[3][3]){
   M3 out;
-    for(int i=0;i<3;i++){
-      for(int j=0;j<3;j++){
-        out.index[i][j] = arr[i][j];
-    }
-  }
+  memcpy(out.index, arr, 9*4);
   return out;
 }
 M3 arr_to_M3(float *arr){
   M3 out;
-  for(int i=0;i<9;i++){
-        out.index[i/3][i%3] = arr[i];
-  }
+  memcpy(out.index, arr, 9*4);
   return out;
 }
 
@@ -69,7 +64,7 @@ M3 transpose_M3(M3 *matrix){
       arr_trans[i][j] = matrix->index[j][i];
     }
   }
-  M3 out = d2_arr_to_M3(arr_trans);
+  M3 out = arr_to_M3((float *)arr_trans);
   return out;
 }
 float det_M3(M3 *m){

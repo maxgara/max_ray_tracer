@@ -1,4 +1,4 @@
-#include "matrix_new.c"
+#include "matrix.c"
 
 int test_matrix(M3 *matrix){
   printf("matrix:\n");

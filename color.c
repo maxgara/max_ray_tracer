@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define Color uint32_t
-#define CANVAS_X_SIZE 200
-#define CANVAS_Y_SIZE 200
+#define CANVAS_X_SIZE 500
+#define CANVAS_Y_SIZE 500
 typedef struct{
   int x_size;
   int y_size;
